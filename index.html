@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FF002F">
+  <meta name="description" content="Tienda de Juguetes Happy Store - productos divertidos y educativos">
+  <meta name="keywords" content="juguetes, tienda, Happy Store, niños, diversión">
+  <link rel="icon" href="/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Fredoka+One&display=swap" rel="stylesheet">
+  <title>Happy Store | Juguetes divertidos</title>
+
+  <style>
+    /* ================== BODY ================== */
+    
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding-top: 0; /* espacio igual a la altura del header */
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+
+    
+    /* ================== HEADER Y TITULO ================== */
+   
+
+
+/* ================== CONTENEDOR ================== */
+.contenedor {
+  max-width: 1200px;        /* ancho máximo del contenido */
+  margin: 0 auto;           /* centrado horizontal */
+  padding:  23px;          /* espacio interno a los lados */
+  background-color: transparent; /* fondo transparente inicialmente */
+}
+
+/* ================== HEADER ================== */
+header {
+  position: fixed;           /* siempre pegado arriba */
+  top: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 999;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  background-color: transparent; /* transparente inicialmente */
+  box-shadow: none;             /* sin sombra al inicio */
+padding: 5px 0;
+
+}
+
+/* Header con fondo y sombra al hacer scroll */
+header.scrolled {
+  background-color: #fff;              /* fondo blanco */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* sombra suave */
+}
+
+
+
+
+
+
+    
+    #titulo-happy {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.2rem;
+      line-height: 1.2;
+      word-break: break-word;
+    }
+
+    #titulo-happy span {
+      display: inline-block;
+      font-weight: bold;
+      transition: transform 0.3s, color 0.3s;
+      font-size: inherit;
+    }
+
+    #titulo-happy span:nth-child(1) { color: #FF002F; transform: rotate(-5deg); }
+    #titulo-happy span:nth-child(2) { color: #FF7F50; transform: rotate(3deg); }
+    #titulo-happy span:nth-child(3) { color: #FFA500; transform: rotate(-2deg); }
+    #titulo-happy span:nth-child(4) { color: #00BFFF; transform: rotate(4deg); }
+    #titulo-happy span:nth-child(5) { color: #32CD32; transform: rotate(-3deg); }
+    #titulo-happy span:nth-child(6) { color: #FF69B4; transform: rotate(2deg); }
+    #titulo-happy span:nth-child(7) { color: #FF002F; transform: rotate(-4deg); }
+    #titulo-happy span:nth-child(8) { color: #FF8C00; transform: rotate(3deg); }
+    #titulo-happy span:nth-child(9) { color: #1E90FF; transform: rotate(-2deg); }
+    #titulo-happy span:nth-child(10){ color: #32CD32; transform: rotate(2deg); }
+    #titulo-happy span:nth-child(11){ color: #FF1493; transform: rotate(-3deg); }
+
+    #titulo-happy span:hover {
+      transform: scale(1.3) rotate(0deg);
+      cursor: default;
+    }
+
+    /* Ajustes responsivos para título */
+    @media (max-width: 480px) { #titulo-happy { font-size: 1.6rem; } }
+    @media (min-width: 481px) and (max-width: 768px) { #titulo-happy { font-size: 2rem; } }
+
+    /* ================== PRODUCTOS ================== */
+    .productos-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .producto {
+      width: 300px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 6px 15px rgba(255,0,47,0.15);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+.producto > * + * {
+  margin-top: 10px;
+    }
+                                     
+.producto strong {
+  font-weight: 600;
+      }
+    
+    .producto:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(255,0,47,0.25);
+    }
+
+.producto p {
+  margin: 3px 0;
+  line-height: 1.35;
+}
+
+.producto h3 {
+  margin: 6px 0 4px;
+  line-height: 1.2;
+}
+
+
+
+    
+    .producto{
+  animation: fadeIn .35s ease;
+}
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform: translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform: translateY(0);
+  }
+}
+    /* ================== SLIDER ================== */
+    .slider {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      border-radius: 12px;
+      cursor: grab;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .slider img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+      transition: transform 0.3s;
+      border-radius: 12px;
+    }
+
+    .slider img.active { display: block; }
+
+    .slider-dots {
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .slider-dots span {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background-color: #ddd;
+      border-radius: 50%;
+      margin: 0 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .slider-dots span.active { background-color: #FF002F; }
+
+    /* ================== ESTRELLAS ================== */
+    
+
+
+
+
+
+
+.estrellas {
+  display: inline-flex;
+  gap: 2px;
+  margin-bottom: 0;
+  align-items: center;
+      }
+
+.estrella {
+  font-size: 18px;
+  position: relative;
+}
+
+.estrella.llena {
+  color: #FF002F;
+}
+
+.estrella.vacia {
+  color: #ddd;
+}
+
+.estrella.media {
+  color: #ddd;
+}
+
+.estrella.media::before {
+  content: "★";
+  color: #FF002F;
+  position: absolute;
+  width: 50%;
+  overflow: hidden;
+}
+
+    
+
+    /* ================== BOTÓN ================== */
+    button {
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #FF002F, #cc0026);
+      color: #fff;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 8px rgba(255,0,47,0.2);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(255,0,47,0.3);
+    }
+
+    @media (max-width:768px) { .producto { width: 90%; } }
+
+    /* ================== MODAL ZOOM ================== */
+    #zoomModal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+    }
+
+    #zoomModal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+      cursor: zoom-out;
+      transition: transform 0.3s;
+    }
+
+    /* ================== FOOTER ================== */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+/* ================== PAGINACION PROFESIONAL ================== */
+.paginacion-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  margin-top: 30px;
+  user-select: none;
+}
+
+.paginacion-container button {
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  background-color: #FF002F;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(255,0,47,0.2);
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+
+  /* --- NUEVAS LÍNEAS PARA CENTRAR CONTENIDO --- */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  transform: translateY(0);
+  }
+
+.paginacion-container button:hover:not(:disabled) {
+  background-color: #cc0026;
+
+  
+  box-shadow: 0 6px 12px rgba(255,0,47,0.3);
+}
+
+.paginacion-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.paginacion-container .numero-pagina {
+  min-width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.paginacion-container .numero-pagina:hover {
+  background-color: #FF002F;
+  color: #fff;
+}
+
+.paginacion-container .numero-pagina.active {
+  background-color: #FF002F;
+  color: #fff;
+}
+
+    
+/*---- BOTON COMPARTIR ------*/
+    
+.fila-codigo{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.link-compartir{
+  cursor:pointer;
+  color:#FF002F;
+  display:flex;
+  align-items:center;
+  gap:5px;
+  font-size:.85rem;
+  font-weight:600;
+  transition:.25s;
+}
+
+.link-compartir:hover{
+  transform: scale(1.05);
+  text-decoration: underline;
+}
+
+    .link-compartir{
+  background:#fff5f7;
+  padding:4px 8px;
+  border-radius:6px;
+  }
+
+    
+  </style>
+</head>
+<body>
+
+<header>
+  <h1 id="titulo-happy">
+    <span>H</span><span>a</span><span>p</span><span>p</span><span>y</span>
+    <span> </span>
+    <span>S</span><span>t</span><span>o</span><span>r</span><span>e</span>
+  </h1>
+</header>
+
+<div class="contenedor">
+<main>
+  <div id="loadingSpinner" style="position: relative; width: 150px; height: 150px; margin:50px auto;">
+  
+  <!-- Imagen centrada -->
+  <img src="https://png.pngtree.com/png-clipart/20240608/original/pngtree-3d-photo-of-colorful-toys-for-children-on-transparent-background-png-image_15280851.png"
+       alt="Juguetes 3D"
+       style="
+         width:150px; 
+         height:150px; 
+         position:absolute; 
+         top:50%; 
+         left:50%; 
+         transform: translate(-50%, -50%);
+         object-fit:contain;
+         z-index:1;
+       ">
+
+  <!-- Círculo giratorio -->
+  <div style="
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    position:absolute;
+    top:0;
+    left:0;
+    background: conic-gradient(
+      rgba(255,0,47,0) 0deg,
+      rgba(255,0,47,0.05) 180deg,
+      rgba(255,0,47,0.3) 240deg,
+      rgba(255,0,47,0.6) 300deg,
+      rgba(255,0,47,0.9) 330deg,
+      rgba(255,0,47,1) 360deg
+    );
+
+    mask-image: radial-gradient(circle, transparent 68.1%, black 62%);
+    -webkit-mask-image: radial-gradient(circle, transparent 68.1%, black 62%);
+
+    animation: spin 1.1s linear infinite;
+    z-index:2;
+  "></div>
+
+  <!-- Texto -->
+  <span style="
+    position:absolute; 
+    top:115%; 
+    left:50%; 
+    transform: translate(-50%, 0); 
+    font-family:Arial, sans-serif; 
+    font-size:18px; 
+    color:#000; 
+    white-space:nowrap;">
+    Cargando Productos<span class="dots"></span>
+  </span>
+
+</div>
+
+<style>
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Animación de puntos */
+.dots::after{
+  content: "";
+  animation: dots 1.4s steps(4,end) infinite;
+}
+
+@keyframes dots{
+  0%   { content:""; }
+  25%  { content:"."; }
+  50%  { content:".."; }
+  75%  { content:"..."; }
+  100% { content:""; }
+}
+</style>
+  <div id="productos" class="productos-container"></div>
+
+  <div id="paginacion" class="paginacion-container"></div>
+  
+</main>
+</div>
+<div id="zoomModal">
+  <img id="zoomImg" alt="Imagen ampliada del producto">
+</div>
+
+<footer>
+  <p>© 2026 Happy Store | Todos los derechos reservados</p>
+</footer>
+
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbz5jmczBym2G_VaClZiNriAqYTpF-6qDSnRzWhRaSNHtGlDHECy03PhJT0polNG00endw/exec";
+let listaProductos = [];
+
+
+  let paginaActual = 1;
+const productosPorPagina = 6;
+let totalPaginas = 1;
+
+
+// ------------------- RANDOM CON SEMILLA -------------------
+function randomConSemilla(seed) {
+  var x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+}
+
+function shuffleConSemilla(array, semilla) {
+  let copia = [...array];
+  for (let i = copia.length - 1; i > 0; i--) {
+    const j = Math.floor(randomConSemilla(semilla + i) * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+  return copia;
+}
+
+// ------------------- USUARIO ÚNICO -------------------
+function getUserId() {
+  let userId = localStorage.getItem("userId");
+  if (!userId) {
+    userId = Math.floor(Math.random() * 1e9);
+    localStorage.setItem("userId", userId);
+  }
+  return parseInt(userId);
+}
+
+// ------------------- SEMILLA DIARIA -------------------
+function getDailySeed() {
+  const today = new Date();
+  const dia = today.getFullYear()*10000 + (today.getMonth()+1)*100 + today.getDate();
+  const userId = getUserId();
+  return dia + userId;
+}
+
+// ------------------- ORDEN PERSISTENTE -------------------
+
+function obtenerOrdenProductos(lista) {
+  const semilla = getDailySeed();
+  const key = `ordenProductos-${semilla}`;
+
+  let ordenGuardado = localStorage.getItem(key);
+  let indices;
+
+  if (ordenGuardado) {
+    indices = JSON.parse(ordenGuardado);
+
+    // --- AGREGAR NUEVOS PRODUCTOS ---
+    const nuevos = lista.map((_, i) => i).filter(i => !indices.includes(i));
+    if (nuevos.length > 0) {
+      indices = [...indices, ...shuffleConSemilla(nuevos, semilla)];
+    }
+
+    // --- ELIMINAR PRODUCTOS QUE YA NO EXISTEN ---
+    indices = indices.filter(i => i < lista.length);
+
+    // Guardar el orden actualizado
+    localStorage.setItem(key, JSON.stringify(indices));
+  } else {
+    // crear nuevo orden
+    indices = shuffleConSemilla(lista.map((_, i) => i), semilla);
+    localStorage.setItem(key, JSON.stringify(indices));
+  }
+
+  return indices.map(i => lista[i]);
+  }
+
+
+
+
+
+  
+  
+async function cargarProductos() {  
+  const respuesta = await fetch(API_URL);  
+  listaProductos = await respuesta.json();  
+  listaProductos = listaProductos.slice(1);
+  listaProductos = obtenerOrdenProductos(listaProductos);
+
+  mostrarProductosEnPantalla();
+  
+/* OCULTAR SPINNER */ 
+  document.getElementById("loadingSpinner").style.display = "none";
+  
+  return true;   // ← AGREGA ESTO
+  }
+  
+//SCROOL AUTOMÁTICO 
+
+function scrollProductoDesdeURL(){
+
+  const params = new URLSearchParams(window.location.search);
+  const codigo = params.get("producto");
+
+  if(!codigo) return;
+
+  // Buscar índice del producto
+  const index = listaProductos.findIndex(p => p[1] === codigo);
+  if(index === -1) return;
+
+  // Calcular página
+  paginaActual = Math.floor(index / productosPorPagina) + 1;
+
+  // Renderizar esa página
+  mostrarProductosEnPantalla();
+
+  setTimeout(()=>{
+
+    const elemento = document.getElementById("producto-" + codigo);
+    if(!elemento) return;
+
+    const offset = 120;
+
+    window.scrollTo({
+      top: elemento.offsetTop - offset,
+      behavior: "smooth"
+    });
+
+    // efecto highlight
+    elemento.style.boxShadow = "0 0 0 3px #FF002F";
+
+    setTimeout(()=>{
+      elemento.style.boxShadow = "";
+    }, 2000);
+
+  }, 400);
+}
+
+
+
+  
+function generarEstrellas(valorEstado) {
+  const valor = Number(valorEstado) / 2;
+  let html = '';
+
+  for (let i = 1; i <= 5; i++) {
+    if (valor >= i) {
+      html += '<span class="estrella llena">★</span>';
+    } 
+    else if (valor >= i - 0.5) {
+      html += '<span class="estrella media">★</span>';
+    } 
+    else {
+      html += '<span class="estrella vacia">★</span>';
+    }
+  }
+
+  return `<span class="estrellas">${html}</span>`;
+  }
+
+
+
+
+
+
+  
+function mostrarProductosEnPantalla() {
+  const contenedor = document.getElementById('productos');
+
+  totalPaginas = Math.ceil(listaProductos.length / productosPorPagina);
+  const inicio = (paginaActual - 1) * productosPorPagina;
+  const fin = inicio + productosPorPagina;
+  const productosPagina = listaProductos.slice(inicio, fin);
+
+  contenedor.innerHTML = productosPagina.map((producto, index) => {
+
+    // ------------------ IMÁGENES ------------------
+    const imagenes = [producto[7], producto[8], producto[9], producto[10], producto[11]]
+      .filter(url => url && url.trim() !== "");
+    const sliderId = `slider-${index}`;
+    const dotsId = `dots-${index}`;
+
+    // ------------------ ESTRELLAS ------------------
+    const estrellas = generarEstrellas(producto[5]);
+
+    // ------------------ ESTADO DEL BOTÓN ------------------
+    const estado = (producto[6] || "").trim().toLowerCase();
+    let botonHtml = '';
+    if (estado === "reservado") {
+      botonHtml = `<button disabled style="background:#999">Reservado</button>`;
+    } else if (estado === "vendido") {
+      botonHtml = `<button disabled style="background:#333">Vendido</button>`;
+    } else {
+      botonHtml = `<button id="btn-${producto[1]}" onclick="reservarProducto('${producto[2]}','${producto[1]}', this)">Comprar</button>`;
+  }
+    // ------------------ HTML DEL PRODUCTO ------------------
+    return `
+    
+  <article class="producto" id="producto-${producto[1]}">
+
+  <div class="slider" id="${sliderId}">
+    ${imagenes.map((img, i) => `<img src="${img}" class="${i === 0 ? 'active' : ''}" alt="${producto[2]}" loading="lazy">`).join('')}
+  </div>
+
+  <div class="slider-dots" id="${dotsId}">
+    ${imagenes.map((_, i) => `<span class="${i === 0 ? 'active' : ''}"></span>`).join('')}
+  </div>
+
+  <!-- FILA CODIGO + COMPARTIR -->
+  <div class="fila-codigo">
+    <p><strong>Código:</strong> ${producto[1]}</p>
+
+    <div class="link-compartir"
+onclick="compartirProducto('${producto[1]}','${producto[2]}')">
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <circle cx="18" cy="5" r="3"/>
+    <circle cx="6" cy="12" r="3"/>
+    <circle cx="18" cy="19" r="3"/>
+    <line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/>
+    <line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/>
+  </svg>
+
+  <span>Compartir</span>
+
+</div>
+  </div>
+
+  <p><strong>Estado:</strong> ${estrellas}</p>
+  <h3>${producto[2]}</h3>
+  <p>${producto[3]}</p>
+  <p><strong>Precio:</strong> S/${producto[4]}</p>
+
+  ${botonHtml}
+
+</article>
+    `;
+  }).join('');
+
+  // ------------------ INICIALIZAR SLIDERS ------------------
+  productosPagina.forEach((_, i) => inicializarSlider(i));
+
+  // ------------------ ACTUALIZAR PAGINACIÓN ------------------
+  actualizarPaginacion();
+}
+
+
+
+
+ 
+
+  
+
+
+
+function inicializarSlider(index) {
+  const slider = document.getElementById(`slider-${index}`);
+  const dots = document.getElementById(`dots-${index}`).children;
+  if(!slider) return;
+  const imgs = slider.querySelectorAll("img");
+  if(imgs.length<=1) return;
+
+  let current = 0;
+  let intervalo = setInterval(nextSlide, 3000);
+
+  function nextSlide() {
+    imgs[current].classList.remove("active");
+    dots[current].classList.remove("active");
+    current = (current + 1) % imgs.length;
+    imgs[current].classList.add("active");
+    dots[current].classList.add("active");
+  }
+
+  imgs.forEach(img=>img.addEventListener('click', ()=>{
+    clearInterval(intervalo);
+    document.getElementById('zoomImg').src = img.src;
+    document.getElementById('zoomModal').style.display = 'flex';
+  }));
+
+  document.getElementById('zoomModal').addEventListener('click', ()=>{
+    document.getElementById('zoomModal').style.display = 'none';
+    intervalo = setInterval(nextSlide, 3000);
+  });
+
+  Array.from(dots).forEach((dot,i)=>{
+    dot.addEventListener('click', ()=>{ cambiarSlide(i); });
+  });
+
+  let startX = 0;
+  slider.addEventListener('mousedown', e=>{ startX=e.clientX; clearInterval(intervalo); });
+  slider.addEventListener('mouseup', e=>{ manejarSwipe(e.clientX - startX); });
+  slider.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; clearInterval(intervalo); });
+  slider.addEventListener('touchend', e=>{ manejarSwipe(e.changedTouches[0].clientX - startX); });
+
+  function manejarSwipe(diff){
+    if(diff>50) current = (current-1+imgs.length)%imgs.length;
+    else if(diff<-50) current = (current+1)%imgs.length;
+    cambiarSlide(current);
+    intervalo = setInterval(nextSlide, 3000);
+  }
+
+  function cambiarSlide(nuevo){
+    imgs.forEach(img=>img.classList.remove("active"));
+    Array.from(dots).forEach(dot=>dot.classList.remove("active"));
+    current = nuevo;
+    imgs[current].classList.add("active");
+    dots[current].classList.add("active");
+  }
+}
+
+
+
+function actualizarPaginacion() {
+  const contenedor = document.getElementById('paginacion');
+  contenedor.innerHTML = '';
+
+  // Botón anterior
+  const btnAnterior = document.createElement('button');
+  btnAnterior.textContent = '‹';
+  btnAnterior.disabled = paginaActual === 1;
+  btnAnterior.onclick = () => cambiarPagina(-1);
+  contenedor.appendChild(btnAnterior);
+
+  let mostrar = [];
+  const anchoPantalla = window.innerWidth;
+
+  if (anchoPantalla <= 480) {
+    // MÓVIL: mostrar 3 números alrededor de la página actual + primero y último
+    mostrar.push(1); // primera página siempre
+    if (paginaActual > 3) mostrar.push('...');
+
+    const start = Math.max(2, paginaActual - 1);
+    const end = Math.min(totalPaginas - 1, paginaActual + 1);
+
+    for (let i = start; i <= end; i++) mostrar.push(i);
+
+    if (paginaActual < totalPaginas - 2) mostrar.push('...');
+    if (totalPaginas > 1) mostrar.push(totalPaginas); // última página siempre
+  } else {
+    // Escritorio: mostrar hasta 5 números alrededor de la página actual
+    if (totalPaginas <= 7) {
+      for (let i = 1; i <= totalPaginas; i++) mostrar.push(i);
+    } else {
+      mostrar.push(1);
+      let start = Math.max(paginaActual - 2, 2);
+      let end = Math.min(paginaActual + 2, totalPaginas - 1);
+
+      if (start > 2) mostrar.push('...');
+      for (let i = start; i <= end; i++) mostrar.push(i);
+      if (end < totalPaginas - 1) mostrar.push('...');
+      mostrar.push(totalPaginas);
+    }
+  }
+
+  mostrar.forEach(i => {
+    const span = document.createElement('span');
+    if (i === '...') {
+      span.textContent = '...';
+      span.style.pointerEvents = 'none';
+    } else {
+      span.textContent = i;
+      span.className = 'numero-pagina' + (i === paginaActual ? ' active' : '');
+      span.onclick = () => { 
+  paginaActual = i;
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+  setTimeout(()=>{
+    mostrarProductosEnPantalla();
+  }, 120);
+};
+    }
+    contenedor.appendChild(span);
+  });
+
+  // Botón siguiente
+  const btnSiguiente = document.createElement('button');
+  btnSiguiente.textContent = '›';
+  btnSiguiente.disabled = paginaActual === totalPaginas;
+  btnSiguiente.onclick = () => cambiarPagina(1);
+  contenedor.appendChild(btnSiguiente);
+}
+
+
+
+  
+// Actualizar paginación al cambiar tamaño de ventana
+window.addEventListener('resize', actualizarPaginacion);
+
+    
+cargarProductos().then(()=>{
+  scrollProductoDesdeURL();
+  actualizarSoloEstados();
+});
+
+
+async function actualizarSoloEstados() {
+
+if(typeof carrito === "undefined") return;
+  
+  const respuesta = await fetch(API_URL);
+  let data = await respuesta.json();
+  data = data.slice(1);
+
+  data.forEach(producto => {
+
+    const codigo = producto[1];
+    const estado = (producto[6] || "").trim().toLowerCase();
+
+    const boton = document.getElementById("btn-" + codigo);
+    if(!boton) return;
+
+    if(estado === "reservado"){
+      boton.innerText = "Reservado";
+      boton.disabled = true;
+      boton.style.background = "#999";
+    }
+    else if(estado === "vendido"){
+      boton.innerText = "Vendido";
+      boton.disabled = true;
+      boton.style.background = "#333";
+    }
+else if(estado === "disponible"){
+  boton.innerText = "Comprar";
+  boton.disabled = false;
+  boton.style.background = "";
+  boton.dataset.loading = ""; // <--- resetear aquí
+
+  // eliminar del carrito si estaba reservado y expiró
+  const index = carrito.findIndex(item => item.codigo === codigo);
+  if(index !== -1){
+    carrito.splice(index, 1);
+    actualizarCarritoStorage();
+    actualizarCantidadCarrito();
+    mostrarCarrito();
+  }
+}
+
+  });
+
+}
+
+
+// Ejecutar cada 10 segundos
+setInterval(() => {
+  actualizarSoloEstados();
+}, 10000);
+
+// Ejecutar al cargar la página
+window.addEventListener("load", ()=>{
+  actualizarSoloEstados();
+});
+
+
+
+  function cambiarPagina(direccion){
+
+  paginaActual += direccion;
+  if(paginaActual < 1) paginaActual = 1;
+  if(paginaActual > totalPaginas) paginaActual = totalPaginas;
+
+  // SCROLL SUAVE PRIMERO
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+  // Luego renderizar productos (evita salto visual)
+  setTimeout(()=>{
+    mostrarProductosEnPantalla();
+  }, 120);
+  }
+
+
+
+
+
+
+
+
+    // Cambiar fondo del header al hacer scroll
+const header = document.querySelector('header');
+
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 50){ // si se scrollea más de 50px
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+
+  // Ajusta el padding-top del body según la altura real del header
+function ajustarPaddingHeader() {
+  const header = document.querySelector('header');
+  document.body.style.paddingTop = (header.offsetHeight - 18) + 'px';
+}
+
+// Ejecutar al cargar la página
+window.addEventListener('load', ajustarPaddingHeader);
+
+// Ejecutar al cambiar tamaño de ventana (responsive)
+window.addEventListener('resize', ajustarPaddingHeader);
+  
+
+</script>
+
+
+
+    
+
+<!-- ================== CARRITO DE COMPRAS ================== -->
+<!-- Botón flotante -->
+<div id="carritoBtn">
+  🛒 <span id="cantidadCarrito">0</span>
+</div>
+
+<!-- Modal del carrito -->
+<div id="carritoModal">
+  <div class="carrito-content">
+    <div class="carrito-header">
+      <h2>Tu Carrito</h2>
+      <span id="cerrarCarrito">&times;</span>
+    </div>
+    <div id="carritoItems" class="carrito-items"></div>
+    <div class="carrito-footer">
+      <p>Total: S/<span id="totalCarrito">0</span></p>
+      <button id="checkoutBtn">Ir a pagar</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* BOTÓN FLOTANTE */
+  #carritoBtn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, #FF002F, #cc0026);
+    color: #fff;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(255,0,47,0.3);
+    z-index: 2000;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  #carritoBtn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(255,0,47,0.4);
+  }
+  #cantidadCarrito {
+    background: #fff;
+    color: #FF002F;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-weight: bold;
+  }
+
+  /* MODAL CARRITO */
+  #carritoModal {
+    display: none;
+    position: fixed;
+    z-index: 1500;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .carrito-content {
+    background: #fff;
+    width: 400px;
+    max-width: 90%;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-height: 90%;
+  }
+
+  .carrito-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #FF002F;
+    color: #fff;
+  }
+
+  .carrito-header h2 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+
+  #cerrarCarrito {
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .carrito-items {
+    padding: 15px;
+    overflow-y: auto;
+    flex-grow: 1;
+  }
+
+  .carrito-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .carrito-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 10px;
+  }
+
+  .carrito-item-info {
+    flex-grow: 1;
+  }
+
+  .carrito-item-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 1rem;
+  }
+
+  .carrito-item-info p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+  .carrito-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .carrito-item-controls input {
+    width: 40px;
+    padding: 3px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+
+  .carrito-item-controls button {
+    background: #FF002F;
+    color: #fff;
+    border: none;
+    padding: 3px 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .carrito-item-controls button:hover {
+    background: #cc0026;
+  }
+
+  .carrito-footer {
+    padding: 15px;
+    background: #f5f5f5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .carrito-footer button {
+    padding: 10px 15px;
+    background: #FF002F;
+    border: none;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .carrito-footer button:hover {
+    background: #cc0026;
+  }
+
+  @media (max-width:480px) {
+    .carrito-content { width: 95%; }
+    .carrito-item img { width: 50px; height: 50px; }
+  }
+</style>
+
+<script>
+  let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+  function actualizarCarritoStorage() {
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+  }
+
+  function actualizarCantidadCarrito() {
+    const cantidad = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+    document.getElementById('cantidadCarrito').textContent = cantidad;
+  }
+
+  function agregarAlCarrito(producto) {
+    const index = carrito.findIndex(item => item.codigo === producto.codigo);
+    if(index !== -1){
+      carrito[index].cantidad += 1;
+    } else {
+      carrito.push({...producto, cantidad:1});
+    }
+    actualizarCarritoStorage();
+    actualizarCantidadCarrito();
+    mostrarCarrito();
+  }
+
+ async function eliminarDelCarrito(codigo) {
+  // Llamada a la API para liberar el producto
+  await fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "liberar",
+      codigo: codigo
+    })
+  });
+
+  // Quitar del carrito local
+  carrito = carrito.filter(item => item.codigo !== codigo);
+
+  // Actualizar almacenamiento y UI
+  actualizarCarritoStorage();
+  actualizarCantidadCarrito();
+  mostrarCarrito();
+
+  // === RESET DEL BOTÓN DEL PRODUCTO ===
+  const btn = document.getElementById("btn-" + codigo);
+  if(btn){
+    btn.innerText = "Comprar";
+    btn.disabled = false;
+    btn.style.background = "linear-gradient(135deg, #FF002F, #cc0026)";
+    btn.style.boxShadow = "0 4px 8px rgba(255,0,47,0.2)";
+    btn.dataset.loading = ""; // <--- importante para que se pueda volver a comprar
+  }
+  }
+  function cambiarCantidad(codigo, cantidad) {
+    const index = carrito.findIndex(item => item.codigo === codigo);
+    if(index !== -1){
+      carrito[index].cantidad = parseInt(cantidad);
+      if(carrito[index].cantidad < 1) carrito[index].cantidad = 1;
+      actualizarCarritoStorage();
+      actualizarCantidadCarrito();
+      mostrarCarrito();
+    }
+  }
+
+  function mostrarCarrito() {
+    const contenedor = document.getElementById('carritoItems');
+    contenedor.innerHTML = '';
+    let total = 0;
+    carrito.forEach(item => {
+      total += item.precio * item.cantidad;
+      contenedor.innerHTML += `
+        <div class="carrito-item">
+          <img src="${item.imagen}" alt="${item.nombre}">
+          <div class="carrito-item-info">
+            <h4>${item.nombre}</h4>
+            <p>S/${item.precio} c/u</p>
+          </div>
+          <div class="carrito-item-controls">
+            <input type="number" value="${item.cantidad}" min="1" onchange="cambiarCantidad('${item.codigo}', this.value)">
+            <button onclick="eliminarDelCarrito('${item.codigo}').then(() => actualizarSoloEstados())">X</button>
+          </div>
+        </div>
+      `;
+    });
+    document.getElementById('totalCarrito').textContent = total.toFixed(2);
+  }
+
+  // BOTÓN CARRITO
+  // BOTÓN CARRITO con actualización de botones
+document.getElementById('carritoBtn').addEventListener('click', async ()=>{
+  document.getElementById('carritoModal').style.display = 'flex';
+  
+  // Actualiza los estados de los botones antes de mostrar el carrito
+  await actualizarSoloEstados();
+
+  // Muestra el carrito
+  mostrarCarrito();
+});
+
+  document.getElementById('cerrarCarrito').addEventListener('click', ()=>{
+    document.getElementById('carritoModal').style.display = 'none';
+  });
+
+  // Checkout
+document.getElementById('checkoutBtn').addEventListener('click', async ()=>{
+
+  if(carrito.length === 0){
+    alert('Tu carrito está vacío');
+    return;
+  }
+
+  // pasar todos a vendido
+  for(const item of carrito){
+    await fetch(API_URL, {
+      method: "POST",
+      body: JSON.stringify({
+        action: "vender",
+        codigo: item.codigo
+      })
+    });
+  }
+
+  let mensaje = 'Hola! Quiero comprar:\n';
+
+  carrito.forEach(item => {
+    mensaje += `${item.nombre} (Código: ${item.codigo}) x ${item.cantidad}\n`;
+  });
+
+  mensaje = encodeURIComponent(mensaje);
+
+  // vaciar carrito
+  carrito = [];
+  actualizarCarritoStorage();
+  actualizarCantidadCarrito();
+  mostrarCarrito();
+
+  window.open(`https://wa.me/51970984529?text=${mensaje}`, '_blank');
+});
+
+  // Inicializar cantidad carrito al cargar
+  actualizarCantidadCarrito();
+
+  // ================== MODIFICAR BOTÓN COMPRAR EXISTENTE ==================
+ async function reservarProducto(nombreProducto, codigoProducto, btn) {
+if(btn.dataset.loading) return;
+btn.dataset.loading = true;
+
+   
+btn.innerText = "Reservando...";
+btn.disabled = true;
+btn.style.background = "linear-gradient(135deg,#ff8097,#ff4d6d)";
+btn.style.boxShadow = "none";
+
+  const respuesta = await fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "reservar",
+      codigo: codigoProducto
+    })
+  });
+
+  const data = await respuesta.json();
+
+  if(data.success){
+
+    // agregar al carrito
+    const producto = listaProductos.find(p => p[1] === codigoProducto);
+
+    const prodObj = {
+      nombre: producto[2],
+      codigo: producto[1],
+      precio: Number(producto[4]),
+      imagen: producto[7] || ''
+    };
+
+    agregarAlCarrito(prodObj);
+
+    btn.innerText = "Reservado";
+    btn.style.background = "#999";
+
+  } else {
+    alert(data.mensaje);
+    btn.innerText = "Comprar";
+    btn.disabled = false;
+  }
+}
+
+  // BOTON COMPARTIR 
+function compartirProducto(codigo, nombre){
+
+  const url = window.location.origin + window.location.pathname + "?producto=" + codigo;
+
+  if(navigator.share){
+    navigator.share({
+      title: nombre,
+      text: "Mira este producto",
+      url: url
+    }).catch(()=>{});
+  } 
+  else if(navigator.clipboard){
+    navigator.clipboard.writeText(url);
+    alert("Link copiado");
+  } 
+  else {
+    prompt("Copia este link:", url);
+  }
+}
+
+</script>
+
+</body>
+                                                              </html>
